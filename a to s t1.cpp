@@ -3,13 +3,14 @@
 #include<conio.h>
 #include<stdio.h>
 #include<string.h>
+#include<iomanip>
 using namespace std;
 
 class Product
 {
       int Price;
       char ProductName[30];
-      char ProductCode[30];
+      int ProductCode;
       int totalQ;
       float Weight;
     public:
@@ -17,41 +18,81 @@ class Product
       void show();
       void update();
 
-      char getProductCode()
+      int getProductCode()
       {
-          return ProductCode[30];
+          return ProductCode;
+      }
+      int getPrice()
+      {
+          return Price;
       }
 };
 
+
 void Product::accept()
 {
-    Product p1;
-        cout<<"\nPrice: ";
-        cin>>Price;
+
         cout<<"Product Name: ";
         fflush(stdin);
 		gets(ProductName);
+		cout<<"Product Code: ";
+		cin>>ProductCode;
+		cout<<"Price: ";
+        cin>>Price;
         cout<<"Total Quantity: ";
 		cin>>totalQ;
-		cout<<"Product Code: ";
-		fflush(stdin);
-		gets(ProductCode);
 		cout<<"Weight(IN K.g.): ";
 		cin>>Weight;
+
 }
+
+
+void Create_bill()
+{
+    int i,billno,dd,mm,yyyy;
+    char name[30];
+    int phone;
+    char address[30];
+
+    cout<<"Bill no:";
+    cin>>billno;
+    cout<<"Date (dd mm yyyy):";
+    cin>>dd>>mm>>yyyy;
+    cout<<"Name of customer:";
+    fflush(stdin);
+    gets(name);
+    cout<<"Address of the customer:";
+    fflush(stdin);
+    gets(address);
+    cout<<"Phone number of the customer:";
+    cin>>phone;
+
+    system("PAUSE");
+    cout<<"The bill is:"<<endl;
+    cout<<"\n Bill no ="<<billno<<endl;
+    cout<<"Customer Name ="<<name[30]<<endl;
+    cout<<"Date(DD/MM/YYYY) = "<<dd<<"/"<<mm<<"/"<< yyyy<<endl;
+    cout<<"Customer Phone ="<<phone<<endl;
+    cout<<"Customer address = "<<address<<endl;
+	
+	//rest is in progress and dividing into class is still remaining
+	
+    system("PAUSE");
+
+}
+
+
 
 void Product::show()
 {
-    Product p1;
-
-        cout<<endl<<"Price: ";
-        cout<<Price<<endl;
         cout<<"Product Name: ";
         puts(ProductName);
+        cout<<"Product Code: ";
+		cout<<ProductCode<<endl;
+		cout<<"Price: ";
+        cout<<Price<<endl;
         cout<<"Total Quantity: ";
 		cout<<totalQ<<endl;
-		cout<<"Product Code: ";
-		puts(ProductCode);
 		cout<<"Weight(in K.g) ";
 		cout<<Weight<<endl<<endl;
 		system("PAUSE");
@@ -60,23 +101,23 @@ void Product::show()
 
 void Product::update()
 {
-    Product p1;
-	char ProductNewName[30], ProductCodeNew[30];
+
+	char ProductNewName[30] ;
     float WeightNew;
-    int NewtotalQ;
+    int NewtotalQ,ProductCodeNew;
     cout<<"\nEnter the new Details...";
     cout<<"\nNew Product Name (Enter '1' to retain old one): ";
     fflush(stdin);   gets(ProductNewName);
     cout<<"\nNew Product Code (Enter '1' to retain old one): ";
-    fflush(stdin);   gets(ProductCodeNew);
+    cin>>ProductCodeNew;
 	cout<<"\nNew New Total Quantity (Enter 1 to retain old one, ex: 25000): ";
     cin>>NewtotalQ;
     cout<<"\nNew New Weight (Enter 1 to retain old one, ex: 25000): ";
     cin>>WeightNew;
 	if(strcmp(ProductNewName,"1")!=0)
 	   strcpy(ProductName,ProductNewName);
-	if(strcmp(ProductCodeNew,"1")!=0)
-	   strcpy(ProductCode,ProductCodeNew);
+	if(ProductCodeNew!=1)
+	   ProductCode=ProductCodeNew;
 	if(NewtotalQ!=1)
 	   totalQ=NewtotalQ;
 	if(WeightNew!=1)
@@ -249,6 +290,10 @@ void Update_record()
      system("PAUSE");
 }
 
+void Crete_bill()
+{
+
+}
 
 void main_menu()
 {
@@ -285,6 +330,9 @@ void main_menu()
            case 5: Search_Product();
                    break;
 
+           case 6: Create_bill();
+                   break;
+
            case 7: break;
 
            default: cout<<"\nNo such option...\n\n";
@@ -302,4 +350,6 @@ int main()
     getch();
     return 0;
 }
+
+
 
