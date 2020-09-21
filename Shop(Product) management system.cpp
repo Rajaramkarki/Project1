@@ -352,10 +352,6 @@ void Update_record()
      system("PAUSE");
 }
 
-void Crete_bill()
-{
-
-}
 
 void main_menu()
 {
