@@ -59,7 +59,7 @@ void Create_bill()
     char phone[10];
     char address[30];
     int ProCode[10], quantity[10];
-	float totalPrice[10];
+	float totalPrice[10],grandTotal = 0;
 	char found='n';
 
     cout<<"Name of customer:";
@@ -97,6 +97,8 @@ void Create_bill()
                     cin>>quantity[i];
                     totalPrice[i] = p[i].getPrice() * quantity[i];
                     cout<<"The Total amount is "<<totalPrice[i]<<endl;
+
+                    grandTotal += totalPrice[i];
                   found='y';
             }
     }
@@ -104,8 +106,6 @@ void Create_bill()
        {cout<<"\nPLease check the product code again !!!\n";}
     file.close();
     system("PAUSE");
-
-
     }
 
     cout<<"The bill is:"<<endl;
@@ -115,15 +115,15 @@ void Create_bill()
 
      cout << setfill(' ')
      << setw(1)  << "PAN No. = 030080100"
-     << setw(42) << "Date(DD/MM/YYYY) = "<<dd<<"/"<<mm<<"/"<< yyyy
+     << setw(47) << "Date(DD/MM/YYYY) = "<<dd<<"/"<<mm<<"/"<< yyyy
      << endl;
      cout << setfill(' ')
      << setw(1)  << "Bill no ="<<billno
-     << setw(44) << "Customer Name ="<<CustomerName
+     << setw(49) << "Customer Name ="<<CustomerName
      << endl;
      cout << setfill(' ')
      << setw(1)  << "Customer Phone ="<<phone
-     << setw(35) << "Customer address = "<<address
+     << setw(40) << "Customer address = "<<address
      << endl;
     cout<<"\n"<<endl;
     cout << setfill(' ')
@@ -133,16 +133,22 @@ void Create_bill()
      << setw(20) << "Quantity"
      << setw(20) << "Total Amount"
      << endl;
+
      for(i=0;i<n;i++)
      {
-      cout << setfill(' ')
-     << setw(1) << i+1
-     << setw(18) << p[i].getProductName()
-     << setw(20) << p[i].getPrice()
-     << setw(20) << quantity[i]
-     << setw(20) << totalPrice[i]
-     << endl;
+        cout << setfill(' ')
+        << setw(1) << i+1
+        << setw(18) << p[i].getProductName()
+        << setw(20) << p[i].getPrice()
+        << setw(20) << quantity[i]
+        << setw(20) << totalPrice[i]
+        << endl;
      }
+     cout << "\n"<<endl;
+     cout << setfill(' ')
+     <<setw(74)<<"Grand Total = "<<grandTotal
+     <<endl;
+
      cout<<"\n"<< endl;
      cout << setfill(' ')
      << setw(81) << "Signature"
