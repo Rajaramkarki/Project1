@@ -31,8 +31,45 @@ private:
       {
           return ProductName;
       }
+      int gettotalQ()
+      {
+          return totalQ;
+      }
 };
+/*
+class Bill{
+    private:
+        int billno,dd,mm,yyyy;
+        int quantity[10];
+        float totalPrice[10],grandTotal = 0;
+    public:
+        static void Create_bill();
+        void accept();
+};
+*/
+/*
+class Customer{
+    private:
+        char CustomerName[20];
+        char phone[10];
+        char address[30];
+    public:
+        void accept();
+        string getCustomerName()
+        {
+            return CustomerName;
+        }
+        string getphone()
+        {
+            return phone;
+        }
+        string getaddress()
+        {
+            return address;
+        }
 
+};
+*/
 void Product::accept()
 {
     cout<<"Product Name: ";
@@ -40,11 +77,11 @@ void Product::accept()
     gets(ProductName);
     cout<<"Product Code: ";
     cin>>ProductCode;
-    cout<<"Price: ";
+    cout<<"Price per unit: ";
     cin>>Price;
     cout<<"Total Quantity: ";
     cin>>totalQ;
-    cout<<"Weight(IN K.g.): ";
+    cout<<"Weight(IN K.g. per unit): ";
     cin>>Weight;
 }
 
@@ -91,7 +128,19 @@ void Product::update()
 	if(WeightNew!=1)
 	   Weight=WeightNew;
 }
-
+/*
+void Customer::accept()
+{
+    cout<<"Name of the customer: ";
+    fflush(stdin);
+    gets(CustomerName);
+    cout<<"Address of the customer: ";
+    fflush(stdin);
+    gets(address);
+    cout<<"Phone number of customer: ";
+    cin>>phone;
+}
+*/
 void Search_Product()
 {
     Product p1;
@@ -271,7 +320,7 @@ void Create_bill()
     float totalPrice[10],grandTotal = 0;
 
     cout<<"Please give information about the products: "<<endl;
-    cout<<"How many products are bought :";
+    cout<<"How many products are bought (max 10 per bill) :";
     cin>>n;
 
     for(i=0;i<n;i++)
@@ -290,8 +339,9 @@ void Create_bill()
                 if(ProCode[i] == p[i].getProductCode())
                 {
                     cout<<"Name = "<<p[i].getProductName()<<" and price per unit = "<<p[i].getPrice()<< endl;
-                    cout<<"Enter the quantity of the item bought: ";
+                    cout<<"Enter the quantity of the item bought (total quantity = "<<p[i].gettotalQ()<<") = ";
                     cin>>quantity[i];
+
                     totalPrice[i] = p[i].getPrice() * quantity[i];
                     cout<<"The Total amount is "<<totalPrice[i]<<endl;
 
@@ -429,5 +479,12 @@ int main()
     getch();
     return 0;
 }
+
+
+
+
+
+
+
 
 
