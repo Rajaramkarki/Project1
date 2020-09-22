@@ -8,6 +8,7 @@ using namespace std;
 
 class Product
 {
+private:
       int Price;
       char ProductName[30];
       int ProductCode;
@@ -32,161 +33,49 @@ class Product
       }
 };
 
-
 void Product::accept()
 {
-
-        cout<<"Product Name: ";
-        fflush(stdin);
-		gets(ProductName);
-		cout<<"Product Code: ";
-		cin>>ProductCode;
-		cout<<"Price: ";
-        cin>>Price;
-        cout<<"Total Quantity: ";
-		cin>>totalQ;
-		cout<<"Weight(IN K.g.): ";
-		cin>>Weight;
-
-}
-
-
-void Create_bill()
-{
-    Product p[10];
-    int n,i,billno,dd,mm,yyyy;
-    char CustomerName[20];
-    char phone[10];
-    char address[30];
-    int ProCode[10], quantity[10];
-	float totalPrice[10],grandTotal = 0;
-	char found='n';
-
-    cout<<"Name of customer:";
+    cout<<"Product Name: ";
     fflush(stdin);
-    gets(CustomerName);
-    cout<<"Address of the customer:";
-    fflush(stdin);
-    gets(address);
-    cout<<"Phone number of the customer:";
-    cin>>phone;
-    cout<<"Date (dd mm yyyy):";
-    cin>>dd>>mm>>yyyy;
-    cout<<"Bill no:";
-    cin>>billno;
-    cout<<"How many products are bought :";
-    cin>>n;
-
-    for(i=0;i<n;i++)
-    {
-
-    ifstream file("sales.dat",ios::in|ios::binary);
-    cout<<"\nEnter the Product Code of the item "<<i+1<<" :" ;
-    cin>>ProCode[i];
-    file.seekg(0,ios::beg);
-    while(1)
-    {
-            file.read((char*)&p[i],sizeof(p[i]));
-            if(!file)
-               break;
-            if(ProCode[i] == p[i].getProductCode())
-            {
-                  cout<<"The Name of the item is "<<p[i].getProductName()<<endl;
-                  cout<<"The price per unit of the item is "<<p[i].getPrice()<<endl;
-                  cout<<"Enter the quantity of the item bought: ";
-                    cin>>quantity[i];
-                    totalPrice[i] = p[i].getPrice() * quantity[i];
-                    cout<<"The Total amount is "<<totalPrice[i]<<endl;
-
-                    grandTotal += totalPrice[i];
-                  found='y';
-            }
-    }
-    if(found=='n')
-       {cout<<"\nPLease check the product code again !!!\n";}
-    file.close();
-    system("PAUSE");
-    }
-
-    cout<<"The bill is:"<<endl;
-    cout<<"\n"<<endl;
-    cout<<"**************************Pavitra Construction Pvt Ltd.**************************"<<endl;
-    cout<<"************************************VAT BILL************************************\n"<<endl;
-
-     cout << setfill(' ')
-     << setw(1)  << "PAN No. = 030080100"
-     << setw(47) << "Date(DD/MM/YYYY) = "<<dd<<"/"<<mm<<"/"<< yyyy
-     << endl;
-     cout << setfill(' ')
-     << setw(1)  << "Bill no ="<<billno
-     << setw(49) << "Customer Name ="<<CustomerName
-     << endl;
-     cout << setfill(' ')
-     << setw(1)  << "Customer Phone ="<<phone
-     << setw(40) << "Customer address = "<<address
-     << endl;
-    cout<<"\n"<<endl;
-    cout << setfill(' ')
-     << setw(1) << "S.N"
-     << setw(20) << "Product Name"
-     << setw(20) << "Price Per unit"
-     << setw(20) << "Quantity"
-     << setw(20) << "Total Amount"
-     << endl;
-
-     for(i=0;i<n;i++)
-     {
-        cout << setfill(' ')
-        << setw(1) << i+1
-        << setw(18) << p[i].getProductName()
-        << setw(20) << p[i].getPrice()
-        << setw(20) << quantity[i]
-        << setw(20) << totalPrice[i]
-        << endl;
-     }
-     cout << "\n"<<endl;
-     cout << setfill(' ')
-     <<setw(74)<<"Grand Total = "<<grandTotal
-     <<endl;
-
-     cout<<"\n"<< endl;
-     cout << setfill(' ')
-     << setw(81) << "Signature"
-     <<endl;
-     cout << setfill(' ')
-     << setw(82) << "-----------"
-     <<endl;
-
-    system("PAUSE");
+    gets(ProductName);
+    cout<<"Product Code: ";
+    cin>>ProductCode;
+    cout<<"Price: ";
+    cin>>Price;
+    cout<<"Total Quantity: ";
+    cin>>totalQ;
+    cout<<"Weight(IN K.g.): ";
+    cin>>Weight;
 }
 
 void Product::show()
 {
-        cout<<"Product Name: ";
-        puts(ProductName);
-        cout<<"Product Code: ";
-		cout<<ProductCode<<endl;
-		cout<<"Price: ";
-        cout<<Price<<endl;
-        cout<<"Total Quantity: ";
-		cout<<totalQ<<endl;
-		cout<<"Weight(in K.g) ";
-		cout<<Weight<<endl<<endl;
-		system("PAUSE");
+    cout<<"Product Name: ";
+    puts(ProductName);
+    cout<<"Product Code: ";
+    cout<<ProductCode<<endl;
+    cout<<"Price: ";
+    cout<<Price<<endl;
+    cout<<"Total Quantity: ";
+    cout<<totalQ<<endl;
+    cout<<"Weight(in K.g) ";
+    cout<<Weight<<endl<<endl;
+    system("PAUSE");
 
 }
 
 void Product::update()
 {
-
 	char ProductNewName[30] ;
     float WeightNew;
-    int NewtotalQ,ProductCodeNew;
+    int NewtotalQ,ProductCodeNew,PriceNew;
     cout<<"\nEnter the new Details...";
     cout<<"\nNew Product Name (Enter '1' to retain old one): ";
     fflush(stdin);   gets(ProductNewName);
     cout<<"\nNew Product Code (Enter '1' to retain old one): ";
     cin>>ProductCodeNew;
+    cout<<"\nNew Price (Enter '1' to retain old one): ";
+    cin>>PriceNew;
 	cout<<"\nNew New Total Quantity (Enter 1 to retain old one, ex: 25000): ";
     cin>>NewtotalQ;
     cout<<"\nNew New Weight (Enter 1 to retain old one, ex: 25000): ";
@@ -195,6 +84,8 @@ void Product::update()
 	   strcpy(ProductName,ProductNewName);
 	if(ProductCodeNew!=1)
 	   ProductCode=ProductCodeNew;
+    if(PriceNew!=1)
+	   Price=PriceNew;
 	if(NewtotalQ!=1)
 	   totalQ=NewtotalQ;
 	if(WeightNew!=1)
@@ -367,10 +258,121 @@ void Update_record()
      system("PAUSE");
 }
 
-void Crete_bill()
+void Create_bill()
 {
+    Product p[10];
+    int n,i, ProCode[10];
+    char found='n';
+    char CustomerName[20];
+    char phone[10];
+    char address[30];
+    int billno,dd,mm,yyyy;
+    int quantity[10];
+    float totalPrice[10],grandTotal = 0;
 
+    cout<<"Please give information about the products: "<<endl;
+    cout<<"How many products are bought :";
+    cin>>n;
+
+    for(i=0;i<n;i++)
+    {
+
+
+        ifstream file("sales.dat",ios::in|ios::binary);
+        cout<<"\nEnter the Product Code of the item "<<i+1<<" :" ;
+        cin>>ProCode[i];
+        file.seekg(0,ios::beg);
+        while(1)
+        {
+                file.read((char*)&p[i],sizeof(p[i]));
+                if(!file)
+               break;
+                if(ProCode[i] == p[i].getProductCode())
+                {
+                    cout<<"Name = "<<p[i].getProductName()<<" and price per unit = "<<p[i].getPrice()<< endl;
+                    cout<<"Enter the quantity of the item bought: ";
+                    cin>>quantity[i];
+                    totalPrice[i] = p[i].getPrice() * quantity[i];
+                    cout<<"The Total amount is "<<totalPrice[i]<<endl;
+
+                    grandTotal += totalPrice[i];
+                    found='y';
+                }
+        }
+    if(found=='n')
+       {cout<<"\nPLease check the product code again !!!\n";}
+    file.close();
+    system("PAUSE");
+    }
+
+    cout<<"\nPlease enter following information : "<<endl;
+    cout<<"Date (dd mm yyyy):";
+    cin>>dd>>mm>>yyyy;
+    cout<<"Bill no:";
+    cin>>billno;
+    cout<<"Name of customer:";
+    fflush(stdin);
+    gets(CustomerName);
+    cout<<"Address of the customer:";
+    fflush(stdin);
+    gets(address);
+    cout<<"Phone number of the customer:";
+    cin>>phone;
+
+    cout<<"The bill is:"<<endl;
+    cout<<"\n"<<endl;
+    cout<<"**************************Pavitra Construction Pvt Ltd.**************************"<<endl;
+    cout<<"************************************VAT BILL************************************\n"<<endl;
+
+     cout << setfill(' ')
+     << setw(1)  << "PAN No. = 030080100"
+     << setw(47) << "Date(DD/MM/YYYY) = " <<dd<<"/"<<mm<<"/"<< yyyy
+     << endl;
+     cout << setfill(' ')
+     << setw(1)  << "Bill no ="<<billno
+     << setw(50) << "Customer Name = " <<CustomerName
+     << endl;
+     cout << setfill(' ')
+     << setw(1)  << "Customer Phone = " <<phone
+     << setw(39) << "Customer address = " <<address
+     << endl;
+    cout<<"\n"<<endl;
+    cout << setfill(' ')
+     << setw(1) << "S.N"
+     << setw(20) << "Product Name"
+     << setw(20) << "Price Per unit"
+     << setw(20) << "Quantity"
+     << setw(20) << "Total Amount"
+     << endl;
+
+     for(i=0;i<n;i++)
+     {
+        cout << setfill(' ')
+        << setw(1) << i+1
+        << setw(18) << p[i].getProductName()
+        << setw(20) << p[i].getPrice()
+        << setw(20) << quantity[i]
+        << setw(20) << totalPrice[i]
+        << endl;
+     }
+     cout << "\n"<<endl;
+     cout << setfill(' ')
+     <<setw(74)<<"Grand Total = "<<grandTotal
+     <<endl;
+
+     cout<<"\n"<< endl;
+     cout << setfill(' ')
+     << setw(81) << "Signature"
+     <<endl;
+     cout << setfill(' ')
+     << setw(82) << "-----------"
+     <<endl;
+
+    system("PAUSE");
 }
+
+
+
 
 void main_menu()
 {
@@ -427,4 +429,5 @@ int main()
     getch();
     return 0;
 }
+
 
