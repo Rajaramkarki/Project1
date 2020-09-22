@@ -317,7 +317,8 @@ void Create_bill()
     char address[30];
     int billno,dd,mm,yyyy;
     int quantity[10];
-    float totalPrice[10],grandTotal = 0;
+    float tempprice[10],totalPrice[10],grandTotal = 0;
+    string tempname[10];
 
     cout<<"Please give information about the products: "<<endl;
     cout<<"How many products are bought (max 10 per bill) :";
@@ -341,12 +342,13 @@ void Create_bill()
                     cout<<"Name = "<<p[i].getProductName()<<" and price per unit = "<<p[i].getPrice()<< endl;
                     cout<<"Enter the quantity of the item bought (total quantity = "<<p[i].gettotalQ()<<") = ";
                     cin>>quantity[i];
-
                     totalPrice[i] = p[i].getPrice() * quantity[i];
                     cout<<"The Total amount is "<<totalPrice[i]<<endl;
-
                     grandTotal += totalPrice[i];
                     found='y';
+
+                    tempprice[i] = p[i].getPrice();
+                    tempname[i] = p[i].getProductName();
                 }
         }
     if(found=='n')
@@ -395,15 +397,15 @@ void Create_bill()
      << setw(20) << "Total Amount"
      << endl;
 
-     for(i=0;i<n;i++)
+     for(i=0;i<n;++i)
      {
-        cout << setfill(' ')
-        << setw(1) << i+1
-        << setw(18) << p[i].getProductName()
-        << setw(20) << p[i].getPrice()
-        << setw(20) << quantity[i]
-        << setw(20) << totalPrice[i]
-        << endl;
+                    cout << setfill(' ')
+                    << setw(1) << i+1
+                    << setw(18) << tempname[i]
+                    << setw(20) << tempprice[i]
+                    << setw(20) << quantity[i]
+                    << setw(20) << totalPrice[i]
+                    << endl;
      }
      cout << "\n"<<endl;
      cout << setfill(' ')
@@ -429,8 +431,9 @@ void main_menu()
 
     int choice;
     system("CLS");
-    cout<<"*******************************************************************************";
-    cout<<"\n\t            \tShop (Sales) Management System\t\t      \n";
+    cout<<"*********************************************************************************"<<endl;
+    cout<<"**************************Pavitra Construction Pvt Ltd.**************************"<<endl;
+    cout<<"\n\t              \t Shop (Sales) Management System\t\t      \n";
     cout<<"*******************************************************************************";
     cout<<"\n\n\t\t\t    <<<<<:: MENU ::>>>>>\n";
     cout<<"\n\t\t\t    1. Add product";
@@ -479,6 +482,12 @@ int main()
     getch();
     return 0;
 }
+
+
+
+
+
+
 
 
 
