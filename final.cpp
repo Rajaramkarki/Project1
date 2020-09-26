@@ -341,7 +341,7 @@ void Create_bill()
                 {
                     cout<<"Name = "<<p[i].getProductName()<<" and price per unit = "<<p[i].getPrice()<< endl;
                     cout<<"Enter the quantity of the item bought (total quantity = "<<p[i].gettotalQ()<<") = ";
-                    cin>>quantity[i];
+                    cin>>quantity[i];   /*if quantity is greater than stock*/
                     totalPrice[i] = p[i].getPrice() * quantity[i];
                     cout<<"The Total amount is "<<totalPrice[i]<<endl;
                     grandTotal += totalPrice[i];
@@ -482,14 +482,6 @@ int main()
     getch();
     return 0;
 }
-
-
-
-
-
-
-
-
 
 
 
