@@ -11,7 +11,7 @@ class Product
 {
     private:
       int Price;
-      char ProductName[30];
+      char ProductName[40];
       int ProductCode;
       int totalQ;
       float Weight;
